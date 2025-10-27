@@ -24,7 +24,7 @@ export default function Dashboard() {
     const storedTickets =
       JSON.parse(localStorage.getItem("ticketapp_tickets")) || [];
     setTickets(storedTickets);
-  }, []);
+  }, [setTickets]);
 
   const total = tickets.length;
   const open = tickets.filter((t) => t.status === "open").length;
@@ -156,6 +156,14 @@ export default function Dashboard() {
         </div>
 
         <div className="mt-20">
+          {tickets.length ? (
+            <p className="text-lg font-semibold text-gray-800 mb-6">
+              Recent Activity
+            </p>
+          ) : (
+            ""
+          )}
+
           <TicketList />
         </div>
       </main>
