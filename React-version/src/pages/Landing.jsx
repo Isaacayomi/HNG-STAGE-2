@@ -25,6 +25,11 @@ export default function Landing() {
           style={{ animationDelay: "1s" }}
         />
 
+        <div className="absolute -top-1 -left-24 w-72 h-72 bg-pink-400/50 rounded-full blur-2xl animate-pulse" />
+        <div className="absolute top-10 -right-16 w-96 h-96 bg-blue-400/50 rounded-full blur-2xl animate-pulse" />
+        <div className="absolute top-10 left-1/3 w-80 h-80 bg-fuchsia-500/60 rounded-full blur-2xl animate-pulse" />
+        <div className="absolute -bottom-10 right-1/4 w-64 h-64 bg-emerald-400/50 rounded-full blur-2xl animate-pulse" />
+
         <div className="relative max-w-7xl mx-auto px-6 py-20 sm:py-32 pb-40">
           <div className="text-center max-w-4xl mx-auto">
             <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm font-medium mb-8 border border-white/30">
