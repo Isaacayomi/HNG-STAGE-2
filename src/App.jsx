@@ -4,7 +4,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import PrivateRoute from "./components/PrivateRoute";
-import Tickets from "./pages/Tickets";
+import Tickets from "./components/Tickets";
 
 export default function App() {
   return (

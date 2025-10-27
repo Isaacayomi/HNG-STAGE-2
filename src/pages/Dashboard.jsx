@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
   BarChart,
   Bar,
@@ -14,11 +14,13 @@ import {
   Legend,
 } from "recharts";
 import { useTicket } from "../context/TicketContext";
+import Tickets from "../components/Tickets";
 import TicketList from "../components/TicektList";
 
 export default function Dashboard() {
   const { logout } = useAuth();
   const { tickets, setTickets } = useTicket();
+  const [isTicketModalOpen, setIsTicketModalOpen] = useState(false);
 
   useEffect(() => {
     const storedTickets =
@@ -51,7 +53,6 @@ export default function Dashboard() {
           >
             Ticket Manager
           </Link>
-
           <nav className="flex items-center gap-6">
             <Link
               to="/tickets"
@@ -71,9 +72,17 @@ export default function Dashboard() {
 
       {/* Dashboard Content */}
       <main className="relative max-w-[1200px] mx-auto px-6 py-12 z-10">
-        <h2 className="text-3xl font-bold text-gray-800 mb-10">
-          Dashboard Overview 📊
-        </h2>
+        <div className="flex justify-between items-center mb-10">
+          <h2 className="text-3xl font-bold text-gray-800">
+            Dashboard Overview 📊
+          </h2>
+          <button
+            onClick={() => setIsTicketModalOpen(true)}
+            className="bg-blue-600 text-white px-6 py-3 rounded-2xl shadow-lg hover:bg-blue-700 transition"
+          >
+            Create Ticket
+          </button>
+        </div>
 
         {/* Stats Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
@@ -102,7 +111,7 @@ export default function Dashboard() {
                 {card.label}
               </p>
               <h3
-                className={`text-4xl font-extrabold bg-gradient-to-r ${card.color} bg-clip-text text-transparent`}
+                className={`text-4xl font-extrabold bg-gradient-to-r text-gray-700 bg-clip-text`}
               >
                 {card.value}
               </h3>
@@ -116,7 +125,7 @@ export default function Dashboard() {
             <h3 className="text-lg font-semibold text-gray-800 mb-6">
               Ticket Summary
             </h3>
-            <ResponsiveContainer width="100%" height={250}>
+            <ResponsiveContainer width="100%" height={300}>
               <BarChart data={data}>
                 <XAxis dataKey="name" tick={{ fill: "#6b7280" }} />
                 <YAxis tick={{ fill: "#6b7280" }} />
@@ -136,11 +145,12 @@ export default function Dashboard() {
             </ResponsiveContainer>
           </div>
 
+          {/* Pie Chart */}
           <div className="bg-white/80 backdrop-blur-lg border border-white/40 rounded-2xl shadow-lg p-6 hover:shadow-xl transition-all">
             <h3 className="text-lg font-semibold text-gray-800 mb-6">
               Ticket Distribution
             </h3>
-            <ResponsiveContainer width="100%" height={250}>
+            <ResponsiveContainer width="100%" height={300}>
               <PieChart>
                 <Pie
                   data={data}
@@ -167,10 +177,26 @@ export default function Dashboard() {
             </ResponsiveContainer>
           </div>
         </div>
+
         <div className="mt-20">
           <TicketList />
         </div>
       </main>
+
+      {/* Ticket Modal */}
+      {isTicketModalOpen && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+          <div className="bg-white/90 backdrop-blur-sm rounded-2xl w-full max-w-lg p-6 relative">
+            <button
+              onClick={() => setIsTicketModalOpen(false)}
+              className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 text-xl font-bold"
+            >
+              ✕
+            </button>
+            <Tickets isModal={true} />
+          </div>
+        </div>
+      )}
 
       <footer className="bg-white/80 backdrop-blur-sm border-t border-white/30 mt-16">
         <div className="max-w-[1200px] mx-auto text-center py-5 text-gray-600 text-sm">
