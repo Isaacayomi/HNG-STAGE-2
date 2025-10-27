@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { useTicket } from "../context/TicketContext";
+import Navbar from "./Navbar";
+import TicketList from "./TicektList";
 
 export default function Tickets({ isModal = false }) {
   const {
@@ -45,12 +47,15 @@ export default function Tickets({ isModal = false }) {
   return (
     <div className={`${!isModal ? "min-h-screen" : ""} flex flex-col`}>
       {!isModal && (
-        <header className="sticky top-0 backdrop-blur-md bg-white/70 shadow-md z-10 p-4">
-          <h2 className="text-xl font-bold">Ticket Manager</h2>
+        <header className="sticky top-0 z-10 p-4">
+          {/* <h2 className="text-xl font-bold">Ticket Manager</h2> */}
+          <Navbar />
         </header>
       )}
 
       <main className="flex-1">
+        <div className="mx-4 mb-10">{!isModal && <TicketList />}</div>
+
         {message && (
           <div className="mb-6 text-center text-sm text-green-600 bg-green-50 py-2 rounded-lg">
             {message}
@@ -59,7 +64,7 @@ export default function Tickets({ isModal = false }) {
 
         <form
           onSubmit={handleSubmit}
-          className="bg-white/70 backdrop-blur-sm shadow-lg rounded-2xl p-6 mb-10 space-y-4"
+          className="bg-white/70 backdrop-blur-sm shadow-lg rounded-2xl p-6 mb-10 space-y-4 mx-4"
         >
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">

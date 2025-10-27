@@ -1,5 +1,3 @@
-import { Link } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
 import { useEffect } from "react";
 import {
   BarChart,
@@ -16,9 +14,9 @@ import {
 import { useTicket } from "../context/TicketContext";
 import Tickets from "../components/Tickets";
 import TicketList from "../components/TicektList";
+import Navbar from "../components/Navbar";
 
 export default function Dashboard() {
-  const { logout } = useAuth();
   const { tickets, setTickets, isTicketModalOpen, setIsTicketModalOpen } =
     useTicket();
 
@@ -46,22 +44,7 @@ export default function Dashboard() {
 
       {/* Navbar */}
       <header className="sticky top-0 backdrop-blur-md bg-white/80 border-b border-white/20 shadow-sm z-10">
-        <div className="max-w-[1200px] mx-auto flex justify-between items-center px-6 py-4">
-          <Link
-            to="/"
-            className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-sky-500 bg-clip-text text-transparent"
-          >
-            Ticket Manager
-          </Link>
-          <nav className="flex items-center gap-6">
-            <button
-              onClick={logout}
-              className="bg-gradient-to-r from-red-500 to-rose-600 text-white px-4 py-2 rounded-lg shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all"
-            >
-              Logout
-            </button>
-          </nav>
-        </div>
+        <Navbar />
       </header>
 
       {/* Dashboard Content */}

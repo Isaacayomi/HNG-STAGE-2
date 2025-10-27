@@ -1,6 +1,9 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 export default function Navbar() {
+  const { logout } = useAuth();
+
   return (
     <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md shadow-sm border-b border-gray-100">
       <div className="max-w-[1440px] mx-auto flex justify-between items-center px-6 py-4">
@@ -13,22 +16,34 @@ export default function Navbar() {
           </h1>
         </Link>
 
-        <nav className="hidden md:flex items-center gap-6">
-          <Link
+        <nav className="hidden md:flex items-center gap-6 ">
+          <NavLink
             to="/dashboard"
-            className="text-gray-700 font-medium hover:text-blue-600 transition"
+            className={({ isActive }) =>
+              `text-gray-700 font-medium hover:text-blue-600 transition ${
+                isActive ? "text-blue-600" : ""
+              }`
+            }
           >
             Dashboard
-          </Link>
-          <Link
+          </NavLink>
+
+          <NavLink
             to="/tickets"
-            className="text-gray-700 font-medium hover:text-blue-600 transition"
+            className={({ isActive }) =>
+              `text-gray-700 font-medium hover:text-blue-600 transition ${
+                isActive ? "text-blue-600" : ""
+              }`
+            }
           >
             Tickets
-          </Link>
+          </NavLink>
         </nav>
 
-        <button className="px-4 py-2 bg-gradient-to-r from-blue-600 to-indigo-500 text-white rounded-lg font-medium shadow hover:shadow-lg transition">
+        <button
+          onClick={logout}
+          className="px-4 py-2 bg-gradient-to-r from-blue-600 to-indigo-500 text-white rounded-lg font-medium shadow hover:shadow-lg transition"
+        >
           Logout
         </button>
 
