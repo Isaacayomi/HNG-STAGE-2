@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import {
   BarChart,
   Bar,
@@ -13,10 +13,12 @@ import {
   Cell,
   Legend,
 } from "recharts";
+import { useTicket } from "../context/TicketContext";
+import TicketList from "../components/TicektList";
 
 export default function Dashboard() {
   const { logout } = useAuth();
-  const [tickets, setTickets] = useState([]);
+  const { tickets, setTickets } = useTicket();
 
   useEffect(() => {
     const storedTickets =
@@ -165,14 +167,8 @@ export default function Dashboard() {
             </ResponsiveContainer>
           </div>
         </div>
-
-        <div className="text-center mt-12">
-          <Link
-            to="/tickets"
-            className="inline-block bg-gradient-to-r from-blue-600 to-sky-500 text-white px-6 py-3 rounded-xl font-semibold shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all"
-          >
-            Go to Ticket Management
-          </Link>
+        <div className="mt-20">
+          <TicketList />
         </div>
       </main>
 

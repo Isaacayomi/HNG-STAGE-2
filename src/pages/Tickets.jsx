@@ -1,27 +1,25 @@
 import { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
 import { Link } from "react-router-dom";
+import { useTicket } from "../context/TicketContext";
 
 export default function Tickets() {
   const { logout } = useAuth();
-  const [tickets, setTickets] = useState([]);
-  const [editing, setEditing] = useState(null);
-  const [form, setForm] = useState({
-    title: "",
-    description: "",
-    status: "open",
-  });
+  const {
+    form,
+    editing,
+    setEditing,
+    setForm,
+    tickets,
+    setTickets,
+    saveTickets,
+  } = useTicket();
   const [message, setMessage] = useState("");
 
   useEffect(() => {
     const stored = JSON.parse(localStorage.getItem("ticketapp_tickets")) || [];
     setTickets(stored);
   }, []);
-
-  const saveTickets = (newTickets) => {
-    localStorage.setItem("ticketapp_tickets", JSON.stringify(newTickets));
-    setTickets(newTickets);
-  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -42,33 +40,6 @@ export default function Tickets() {
 
     setForm({ title: "", description: "", status: "open" });
     setTimeout(() => setMessage(""), 3000);
-  };
-
-  const handleEdit = (index) => {
-    setEditing(index);
-    setForm(tickets[index]);
-  };
-
-  const handleDelete = (index) => {
-    if (confirm("Are you sure you want to delete this ticket?")) {
-      const updated = tickets.filter((_, i) => i !== index);
-      saveTickets(updated);
-      setMessage("Ticket deleted successfully!");
-      setTimeout(() => setMessage(""), 3000);
-    }
-  };
-
-  const statusColor = (status) => {
-    switch (status) {
-      case "open":
-        return "bg-green-100 text-green-600";
-      case "in_progress":
-        return "bg-amber-100 text-amber-600";
-      case "closed":
-        return "bg-gray-100 text-gray-600";
-      default:
-        return "bg-gray-100 text-gray-600";
-    }
   };
 
   return (
@@ -157,48 +128,6 @@ export default function Tickets() {
         </form>
 
         {/* Ticket List */}
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {tickets.length === 0 ? (
-            <p className="text-gray-500 col-span-full text-center">
-              No tickets created yet.
-            </p>
-          ) : (
-            tickets.map((ticket, i) => (
-              <div
-                key={ticket.id || i}
-                className="bg-white/70 backdrop-blur-sm rounded-2xl shadow-lg p-6 flex flex-col justify-between"
-              >
-                <div>
-                  <h3 className="text-lg font-semibold mb-2">{ticket.title}</h3>
-                  <p className="text-sm text-gray-600 mb-2">
-                    {ticket.description || "No description"}
-                  </p>
-                  <span
-                    className={`inline-block px-3 py-1 rounded-full text-xs font-medium ${statusColor(
-                      ticket.status
-                    )}`}
-                  >
-                    {ticket.status.replace("_", " ")}
-                  </span>
-                </div>
-                <div className="flex gap-3 mt-4 justify-end">
-                  <button
-                    onClick={() => handleEdit(i)}
-                    className="text-sm text-blue-600 hover:underline"
-                  >
-                    Edit
-                  </button>
-                  <button
-                    onClick={() => handleDelete(i)}
-                    className="text-sm text-red-600 hover:underline"
-                  >
-                    Delete
-                  </button>
-                </div>
-              </div>
-            ))
-          )}
-        </div>
       </main>
 
       <footer className="bg-white border-t mt-auto">
