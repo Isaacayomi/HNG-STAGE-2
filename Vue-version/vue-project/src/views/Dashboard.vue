@@ -104,20 +104,18 @@
 </template>
 
 <script setup>
-import { ref, onMounted, computed } from 'vue'
+import { onMounted, computed } from 'vue'
 import { useTicketStore } from '../stores/TicketContext'
 import { storeToRefs } from 'pinia'
 import Navbar from '../components/Navbar.vue'
 import Tickets from '../components/Tickets.vue'
 import TicketList from '../components/TicektList.vue'
-// import TicketList from '../components/TicketList.vue'
 import ApexChart from 'vue3-apexcharts'
 
 const ticketStore = useTicketStore()
-const { tickets } = storeToRefs(ticketStore) // ✅ maintains reactivity
-const { setTickets } = ticketStore
+const { tickets, isTicketModalOpen } = storeToRefs(ticketStore)
 
-const isTicketModalOpen = ref(false)
+const { setTickets } = ticketStore
 
 onMounted(() => {
   const storedTickets = JSON.parse(localStorage.getItem('ticketapp_tickets')) || []

@@ -16,23 +16,33 @@ export const useTicketStore = defineStore('ticket', () => {
   const message = ref('')
   const isTicketModalOpen = ref(false)
 
-  const handleEdit = (index) => {
-    editing.value = index
-    Object.assign(form, tickets.value[index])
+  const handleEdit = () => {
+    if (editing.value === null) return
+
+    tickets.value[editing.value] = { ...form }
+    saveTickets(tickets.value)
+    editing.value = null
   }
 
-  const handleDelete = (index) => {
+  const openModal = (index = null) => {
+    editing.value = index
+    if (index !== null) Object.assign(form, tickets.value[index])
+    else Object.assign(form, { title: '', description: '', status: 'open' })
+    isTicketModalOpen.value = true
+  }
+
+  const deleteTicket = (index) => {
     if (confirm('Are you sure you want to delete this ticket?')) {
-      const updated = tickets.value.filter((_, i) => i !== index)
-      saveTickets(updated)
+      tickets.value.splice(index, 1)
+      saveTickets(tickets.value)
       message.value = 'Ticket deleted successfully!'
       setTimeout(() => (message.value = ''), 3000)
     }
   }
 
   const saveTickets = (newTickets) => {
+    tickets.value = [...newTickets]
     localStorage.setItem('ticketapp_tickets', JSON.stringify(newTickets))
-    tickets.value = newTickets
   }
 
   const statusColor = (status) => {
@@ -53,9 +63,10 @@ export const useTicketStore = defineStore('ticket', () => {
     editing,
     form,
     message,
+    openModal,
     isTicketModalOpen,
     handleEdit,
-    handleDelete,
+    deleteTicket,
     saveTickets,
     statusColor,
     setTickets,

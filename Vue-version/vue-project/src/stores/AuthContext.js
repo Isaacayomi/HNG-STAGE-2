@@ -1,18 +1,16 @@
 // src/stores/auth.js
 import { defineStore } from 'pinia'
 import { ref, onMounted } from 'vue'
-
+import router from '../router'
 export const useAuthStore = defineStore('auth', () => {
   const user = ref(null)
 
   // Load session on mount
   const loadSession = () => {
     const session = localStorage.getItem('ticketapp_session')
-    if (session) {
-      const parsed = JSON.parse(session)
-      user.value = parsed.user
-    }
+    if (session) user.value = JSON.parse(session).user
   }
+  loadSession()
 
   // Call it once when the store initializes
   loadSession()
@@ -53,6 +51,7 @@ export const useAuthStore = defineStore('auth', () => {
   const logout = () => {
     localStorage.removeItem('ticketapp_session')
     user.value = null
+    router.push('/login')
   }
 
   return { user, login, signup, logout }

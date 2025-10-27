@@ -2,7 +2,7 @@
 import { useTicketStore } from '../stores/TicketContext'
 
 const ticketStore = useTicketStore()
-const { tickets, statusColor, handleEdit, handleDelete, setIsTicketModalOpen } = ticketStore
+const { tickets, statusColor } = ticketStore
 </script>
 
 <template>
@@ -12,17 +12,13 @@ const { tickets, statusColor, handleEdit, handleDelete, setIsTicketModalOpen } =
     </p>
 
     <div
-      v-else
       v-for="(ticket, i) in tickets"
       :key="ticket.id || i"
       class="bg-white/70 backdrop-blur-sm rounded-2xl shadow-lg p-6 flex flex-col justify-between"
     >
       <div>
         <h3 class="text-lg font-semibold mb-2">{{ ticket.title }}</h3>
-        <p class="text-sm text-gray-600 mb-2">
-          {{ ticket.description || 'No description' }}
-        </p>
-
+        <p class="text-sm text-gray-600 mb-2">{{ ticket.description || 'No description' }}</p>
         <span
           class="inline-block px-3 py-1 rounded-full text-xs font-medium"
           :class="statusColor(ticket.status)"
@@ -32,19 +28,10 @@ const { tickets, statusColor, handleEdit, handleDelete, setIsTicketModalOpen } =
       </div>
 
       <div class="flex gap-3 mt-4 justify-end">
-        <button
-          @click="
-            () => {
-              handleEdit(i)
-              setIsTicketModalOpen(true)
-            }
-          "
-          class="text-sm text-blue-600 hover:underline"
-        >
+        <button @click="ticketStore.openModal(i)" class="text-sm text-blue-600 hover:underline">
           Edit
         </button>
-
-        <button @click="() => handleDelete(i)" class="text-sm text-red-600 hover:underline">
+        <button @click="ticketStore.deleteTicket(i)" class="text-sm text-red-600 hover:underline">
           Delete
         </button>
       </div>
