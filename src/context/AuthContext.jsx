@@ -16,7 +16,7 @@ export function AuthProvider({ children }) {
     }
   }, []);
 
-  // 🔐 Simulate Signup
+  // Simulate Signup
   const signup = (data) => {
     const users = JSON.parse(localStorage.getItem("ticketapp_users")) || [];
 
@@ -36,7 +36,7 @@ export function AuthProvider({ children }) {
     navigate("/dashboard");
   };
 
-  // 🔑 Simulate Login
+  //  Simulate Login
   const login = (data) => {
     const users = JSON.parse(localStorage.getItem("ticketapp_users")) || [];
     const existing = users.find(
@@ -53,7 +53,7 @@ export function AuthProvider({ children }) {
     navigate("/dashboard");
   };
 
-  // 🚪 Logout
+  // Logout
   const logout = () => {
     localStorage.removeItem("ticketapp_session");
     setUser(null);

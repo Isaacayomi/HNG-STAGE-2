@@ -11,6 +11,7 @@ export function TicketProvider({ children }) {
     status: "open",
   });
   const [message, setMessage] = useState("");
+  const [isTicketModalOpen, setIsTicketModalOpen] = useState(false);
 
   const handleEdit = (index) => {
     setEditing(index);
@@ -59,6 +60,8 @@ export function TicketProvider({ children }) {
         editing,
         form,
         message,
+        isTicketModalOpen,
+        setIsTicketModalOpen,
       }}
     >
       {children}

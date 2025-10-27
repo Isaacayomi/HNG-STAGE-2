@@ -1,7 +1,13 @@
 import { useTicket } from "../context/TicketContext";
 
 function TicketList() {
-  const { tickets, statusColor, handleEdit, handleDelete } = useTicket();
+  const {
+    tickets,
+    statusColor,
+    handleEdit,
+    handleDelete,
+    setIsTicketModalOpen,
+  } = useTicket();
   return (
     <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
       {tickets.length === 0 ? (
@@ -29,7 +35,10 @@ function TicketList() {
             </div>
             <div className="flex gap-3 mt-4 justify-end">
               <button
-                onClick={() => handleEdit(i)}
+                onClick={() => {
+                  handleEdit(i);
+                  setIsTicketModalOpen(true);
+                }}
                 className="text-sm text-blue-600 hover:underline"
               >
                 Edit

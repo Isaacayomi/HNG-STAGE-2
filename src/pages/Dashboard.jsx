@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import {
   BarChart,
   Bar,
@@ -19,8 +19,8 @@ import TicketList from "../components/TicektList";
 
 export default function Dashboard() {
   const { logout } = useAuth();
-  const { tickets, setTickets } = useTicket();
-  const [isTicketModalOpen, setIsTicketModalOpen] = useState(false);
+  const { tickets, setTickets, isTicketModalOpen, setIsTicketModalOpen } =
+    useTicket();
 
   useEffect(() => {
     const storedTickets =
@@ -54,12 +54,6 @@ export default function Dashboard() {
             Ticket Manager
           </Link>
           <nav className="flex items-center gap-6">
-            <Link
-              to="/tickets"
-              className="text-gray-700 hover:text-blue-600 font-medium transition"
-            >
-              Manage Tickets
-            </Link>
             <button
               onClick={logout}
               className="bg-gradient-to-r from-red-500 to-rose-600 text-white px-4 py-2 rounded-lg shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all"
@@ -78,7 +72,7 @@ export default function Dashboard() {
           </h2>
           <button
             onClick={() => setIsTicketModalOpen(true)}
-            className="bg-blue-600 text-white px-6 py-3 rounded-2xl shadow-lg hover:bg-blue-700 transition"
+            className="bg-blue-600 text-white px-6 py-3 rounded-2xl shadow-lg hover:bg-blue-700 transition whitespace-nowrap"
           >
             Create Ticket
           </button>

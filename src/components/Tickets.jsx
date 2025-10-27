@@ -10,6 +10,7 @@ export default function Tickets({ isModal = false }) {
     tickets,
     setTickets,
     saveTickets,
+    setIsTicketModalOpen,
   } = useTicket();
   const [message, setMessage] = useState("");
 
@@ -29,10 +30,12 @@ export default function Tickets({ isModal = false }) {
       saveTickets(updated);
       setEditing(null);
       setMessage("Ticket updated successfully!");
+      setIsTicketModalOpen(false);
     } else {
       const newTickets = [...tickets, { ...form, id: Date.now().toString() }];
       saveTickets(newTickets);
       setMessage("Ticket created successfully!");
+      setIsTicketModalOpen(false);
     }
 
     setForm({ title: "", description: "", status: "open" });
@@ -101,6 +104,7 @@ export default function Tickets({ isModal = false }) {
 
           <button
             type="submit"
+            // onClick={() => setIsTicketModalOpen(false)}
             className="bg-blue-600 text-white px-6 py-3 rounded-2xl shadow-md hover:bg-blue-700 transition"
           >
             {editing !== null ? "Update Ticket" : "Create Ticket"}
