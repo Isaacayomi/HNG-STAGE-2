@@ -17,7 +17,7 @@ export default function Tickets({ isModal = false }) {
   useEffect(() => {
     const stored = JSON.parse(localStorage.getItem("ticketapp_tickets")) || [];
     setTickets(stored);
-  }, []);
+  }, [setTickets]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
