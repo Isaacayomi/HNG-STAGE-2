@@ -3,6 +3,10 @@ import { ref, reactive } from 'vue'
 
 export const useTicketStore = defineStore('ticket', () => {
   const tickets = ref([])
+  const setTickets = (data) => {
+    tickets.value = data || []
+  }
+
   const editing = ref(null)
   const form = reactive({
     title: '',
@@ -54,5 +58,6 @@ export const useTicketStore = defineStore('ticket', () => {
     handleDelete,
     saveTickets,
     statusColor,
+    setTickets,
   }
 })

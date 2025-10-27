@@ -4,7 +4,6 @@ import Landing from '../views/Landing.vue'
 import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
 import Dashboard from '../views/Dashboard.vue'
-// import Tickets from '../views/Tickets.vue'
 import Tickets from '../components/Tickets.vue'
 
 const router = createRouter({
@@ -20,7 +19,7 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   const auth = useAuthStore()
-  if (to.meta.requiresAuth && !auth.isAuthenticated) {
+  if (to.meta.requiresAuth && !auth.user) {
     next('/login')
   } else {
     next()

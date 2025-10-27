@@ -105,17 +105,20 @@
 
 <script setup>
 import { ref, onMounted, computed } from 'vue'
-import ApexChart from 'vue3-apexcharts'
+import { useTicketStore } from '../stores/TicketContext'
+import { storeToRefs } from 'pinia'
 import Navbar from '../components/Navbar.vue'
 import Tickets from '../components/Tickets.vue'
 import TicketList from '../components/TicektList.vue'
-import { useTicketStore } from '../stores/TicketContext'
+// import TicketList from '../components/TicketList.vue'
+import ApexChart from 'vue3-apexcharts'
 
-// State from composable
-const { tickets, setTickets } = useTicketStore()
+const ticketStore = useTicketStore()
+const { tickets } = storeToRefs(ticketStore) // ✅ maintains reactivity
+const { setTickets } = ticketStore
+
 const isTicketModalOpen = ref(false)
 
-// Fetch tickets from localStorage
 onMounted(() => {
   const storedTickets = JSON.parse(localStorage.getItem('ticketapp_tickets')) || []
   setTickets(storedTickets)
@@ -131,27 +134,15 @@ const statsCards = computed(() => [
   { label: 'Resolved Tickets', value: resolved.value },
 ])
 
-// ApexCharts Data
 const barOptions = {
   chart: { toolbar: { show: false } },
   xaxis: { categories: ['Open', 'Resolved'] },
   colors: ['#3b82f6', '#22c55e'],
   dataLabels: { enabled: true },
-  plotOptions: {
-    bar: {
-      borderRadius: 6,
-      columnWidth: '45%',
-      distributed: true,
-    },
-  },
+  plotOptions: { bar: { borderRadius: 6, columnWidth: '45%', distributed: true } },
 }
 
-const barSeries = computed(() => [
-  {
-    name: 'Tickets',
-    data: [open.value, resolved.value],
-  },
-])
+const barSeries = computed(() => [{ name: 'Tickets', data: [open.value, resolved.value] }])
 
 const pieOptions = {
   labels: ['Open', 'Resolved'],

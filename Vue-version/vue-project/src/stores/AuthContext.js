@@ -6,13 +6,16 @@ export const useAuthStore = defineStore('auth', () => {
   const user = ref(null)
 
   // Load session on mount
-  onMounted(() => {
+  const loadSession = () => {
     const session = localStorage.getItem('ticketapp_session')
     if (session) {
       const parsed = JSON.parse(session)
       user.value = parsed.user
     }
-  })
+  }
+
+  // Call it once when the store initializes
+  loadSession()
 
   // Signup
   const signup = (data) => {
