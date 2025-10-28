@@ -16,14 +16,6 @@ export const useTicketStore = defineStore('ticket', () => {
   const message = ref('')
   const isTicketModalOpen = ref(false)
 
-  const handleEdit = () => {
-    if (editing.value === null) return
-
-    tickets.value[editing.value] = { ...form }
-    saveTickets(tickets.value)
-    editing.value = null
-  }
-
   const openModal = (index = null) => {
     editing.value = index
     if (index !== null) Object.assign(form, tickets.value[index])
@@ -31,10 +23,20 @@ export const useTicketStore = defineStore('ticket', () => {
     isTicketModalOpen.value = true
   }
 
+  const handleEdit = () => {
+    if (editing.value === null) return
+
+    tickets.value.splice(editing.value, 1, { ...form })
+    tickets.value = [...tickets.value] // forces reactivity
+    localStorage.setItem('ticketapp_tickets', JSON.stringify(tickets.value))
+    editing.value = null
+  }
+
   const deleteTicket = (index) => {
     if (confirm('Are you sure you want to delete this ticket?')) {
       tickets.value.splice(index, 1)
-      saveTickets(tickets.value)
+      tickets.value = [...tickets.value] // forces reactivity
+      localStorage.setItem('ticketapp_tickets', JSON.stringify(tickets.value))
       message.value = 'Ticket deleted successfully!'
       setTimeout(() => (message.value = ''), 3000)
     }
