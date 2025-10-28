@@ -2,11 +2,8 @@ import { defineStore } from 'pinia'
 import { ref, reactive } from 'vue'
 
 export const useTicketStore = defineStore('ticket', () => {
+  // --- State ---
   const tickets = ref([])
-  const setTickets = (data) => {
-    tickets.value = data || []
-  }
-
   const editing = ref(null)
   const form = reactive({
     title: '',
@@ -16,37 +13,53 @@ export const useTicketStore = defineStore('ticket', () => {
   const message = ref('')
   const isTicketModalOpen = ref(false)
 
+  // --- Set Tickets (initial load or reset) ---
+  const setTickets = (data) => {
+    tickets.value = data || []
+  }
+
+  // --- Open Modal (like React handleEdit + modal) ---
   const openModal = (index = null) => {
     editing.value = index
-    if (index !== null) Object.assign(form, tickets.value[index])
-    else Object.assign(form, { title: '', description: '', status: 'open' })
+    if (index !== null) {
+      Object.assign(form, tickets.value[index])
+    } else {
+      Object.assign(form, { title: '', description: '', status: 'open' })
+    }
     isTicketModalOpen.value = true
   }
 
+  // --- Edit Ticket (save changes) ---
   const handleEdit = () => {
     if (editing.value === null) return
 
-    tickets.value.splice(editing.value, 1, { ...form })
-    tickets.value = [...tickets.value] // forces reactivity
-    localStorage.setItem('ticketapp_tickets', JSON.stringify(tickets.value))
+    // update ticket
+    tickets.value[editing.value] = { ...form }
+
+    // save to localStorage
+    saveTickets(tickets.value)
+
+    // reset editing
     editing.value = null
   }
 
+  // --- Delete Ticket ---
   const deleteTicket = (index) => {
-    if (confirm('Are you sure you want to delete this ticket?')) {
-      tickets.value.splice(index, 1)
-      tickets.value = [...tickets.value] // forces reactivity
-      localStorage.setItem('ticketapp_tickets', JSON.stringify(tickets.value))
-      message.value = 'Ticket deleted successfully!'
-      setTimeout(() => (message.value = ''), 3000)
-    }
+    if (!confirm('Are you sure you want to delete this ticket?')) return
+
+    tickets.value.splice(index, 1)
+    saveTickets(tickets.value)
+    message.value = 'Ticket deleted successfully!'
+    setTimeout(() => (message.value = ''), 3000)
   }
 
+  // --- Save Tickets to state + localStorage ---
   const saveTickets = (newTickets) => {
-    tickets.value = [...newTickets]
+    tickets.value = newTickets
     localStorage.setItem('ticketapp_tickets', JSON.stringify(newTickets))
   }
 
+  // --- Status colors ---
   const statusColor = (status) => {
     switch (status) {
       case 'open':
