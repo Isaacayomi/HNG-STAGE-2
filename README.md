@@ -17,10 +17,6 @@ This application allows users to create, manage, and track tickets with features
   - [Switching Between Versions](#switching-between-versions)
 - [UI Components & State Structure](#ui-components--state-structure)
 - [Accessibility & Known Issues](#accessibility--known-issues)
-- [Example Test User Credentials](#example-test-user-credentials)
-- [Screenshots](#screenshots)
-- [Contributing](#contributing)
-- [License](#license)
 
 ---
 
@@ -67,7 +63,7 @@ Two versions of the project are included:
 ### React Version
 
 ```
-react-app/
+React-version/
 ├── public/
 │   └── index.html
 ├── src/
@@ -84,7 +80,8 @@ react-app/
 ### Vue Version
 
 ```
-vue-app/
+Vue-version/
+├── vue-project/
 ├── public/
 │   └── index.html
 ├── src/
@@ -94,7 +91,6 @@ vue-app/
 │   ├── App.vue
 │   ├── main.js
 │   ├── assets/
-│   └── charts/            # ApexCharts components
 ├── package.json
 └── README.md
 ```
@@ -108,8 +104,8 @@ vue-app/
 1. Clone the repository:
 
 ```bash
-git clone <your-repo-url>
-cd react-app
+git clone https://github.com/Isaacayomi/HNG-STAGE-2.git
+cd React-version
 ```
 
 2. Install dependencies:
@@ -121,7 +117,7 @@ npm install
 3. Start development server:
 
 ```bash
-npm start
+npm run dev
 ```
 
 - Opens at `http://localhost:3000`
@@ -139,7 +135,7 @@ npm run build
 1. Navigate to Vue folder:
 
 ```bash
-cd vue-app
+cd Vue-version/vue-project
 ```
 
 2. Install dependencies:
@@ -157,10 +153,10 @@ npm install --save apexcharts vue3-apexcharts
 4. Start development server:
 
 ```bash
-npm run serve
+npm run dev
 ```
 
-- Opens at `http://localhost:8080`
+- Opens at `http://localhost:3000`
 
 5. Build for production:
 
@@ -174,9 +170,6 @@ npm run build
 
 - **React:** Navigate to `react-app` and run the dev server (`npm run dev`)
 - **Vue:** Navigate to `vue-app` and run the dev server (`npm run dev`)
-- **Twig/PHP:** Not included; the directory structure exists only for reference. Normally run via a PHP server.
-
-> Ensure only **one dev server runs at a time** to avoid port conflicts.
 
 ---
 
@@ -221,37 +214,3 @@ npm run build
   - React version: None significant at this time
   - Both versions: No backend, data resets on page reload
 
----
-
-## Example Test User Credentials
-
-> No authentication is implemented, but you can simulate user input:
-
-- **Test User 1:**
-
-  - Name: `Test User`
-  - Email: `test@example.com`
-
-- Use any ticket title/description for testing ticket creation.
-
----
-
-## Screenshots
-
-_(Add screenshots of React & Vue apps here)_
-
----
-
-## Contributing
-
-1. Fork the repository.
-2. Create a feature branch (`git checkout -b feature-name`).
-3. Commit your changes (`git commit -m 'Add feature'`).
-4. Push to branch (`git push origin feature-name`).
-5. Open a pull request.
-
----
-
-## License
-
-This project is open-source and available under the MIT License.
