@@ -1,257 +1,110 @@
-# Ticket Management Web Application
+# Modern Ticket Management App 🎫
 
-A comprehensive **Ticket Management Web Application** built using **React** and **Vue**.  
-This application allows users to create, manage, and track tickets with features such as ticket creation, editing, status updates, and statistics.
+A sleek and efficient Ticket Management application built with modern web technologies. This repository showcases two distinct frontend implementations—one using **React** and the other **Vue.js**—both demonstrating best practices in component-based architecture, state management, and responsive design.
 
----
+## Description
 
-## Table of Contents
+This project provides a complete solution for tracking and managing support tickets. Users can register, log in, and access a dashboard to create, view, update, and delete tickets. The application features an intuitive user interface, data visualizations for ticket analytics, and a seamless user experience, all powered by local storage for persistent data without a backend.
 
-- [Project Overview](#project-overview)
-- [Features](#features)
-- [Tech Stack](#tech-stack)
-- [Folder Structure](#folder-structure)
-- [Setup and Execution](#setup-and-execution)
-  - [React Version](#react-version)
-  - [Vue Version](#vue-version)
-  - [Switching Between Versions](#switching-between-versions)
-- [UI Components & State Structure](#ui-components--state-structure)
-- [Accessibility & Known Issues](#accessibility--known-issues)
-- [Example Test User Credentials](#example-test-user-credentials)
-- [Screenshots](#screenshots)
-- [Contributing](#contributing)
-- [License](#license)
+The dual-framework approach makes this an excellent project for comparing and contrasting React (with Context API) and Vue.js (with Pinia) for state management and application structure.
 
----
+## ✨ Features
 
-## Project Overview
+-   **Dual Frameworks**: Full implementations in both **React** and **Vue.js**.
+-   **User Authentication**: Secure user registration and login functionality (simulated with local storage).
+-   **CRUD Operations**: Full Create, Read, Update, and Delete capabilities for tickets.
+-   **Interactive Dashboard**: A comprehensive overview of ticket statistics with beautiful charts and graphs.
+-   **State Management**: Utilizes React Context API and Vue's Pinia for robust and scalable state management.
+-   **Responsive Design**: A mobile-first, fully responsive UI built with Tailwind CSS.
+-   **Component-Based Architecture**: Well-structured, reusable, and maintainable components.
 
-This application is designed to help teams manage tasks and tickets efficiently.  
-Users can:
+## 🛠️ Technologies Used
 
-- Create new tickets with title, description, and status.
-- Edit or delete existing tickets.
-- Filter tickets by status (open, in progress, closed).
-- View statistics about tickets in a visual way.
+| Category      | Technology                                                                                                                              |
+| :------------ | :-------------------------------------------------------------------------------------------------------------------------------------- |
+| **Frameworks**  | [React.js](https://react.dev/), [Vue.js](https://vuejs.org/)                                                                             |
+| **Styling**     | [Tailwind CSS](https://tailwindcss.com/)                                                                                                |
+| **Routing**     | [React Router](https://reactrouter.com/), [Vue Router](https://router.vuejs.org/)                                                        |
+| **State**       | [React Context API](https://react.dev/learn/passing-data-deeply-with-context), [Pinia](https://pinia.vuejs.org/)                          |
+| **Charting**    | [Recharts](https://recharts.org/) (React), [ApexCharts](https://apexcharts.com/) (Vue)                                                    |
+| **Build Tool**  | [Vite](https://vitejs.dev/)                                                                                                             |
+| **Linting**     | [ESLint](https://eslint.org/)                                                                                                           |
 
-Two versions of the project are included:
+## 🚀 Getting Started
 
-1. **React Version** – Modern, component-based approach using `React Context` for state management.
-2. **Vue Version** – Reactive front-end with Vue 3 using Composition API and charts via `ApexCharts`.
+Follow these instructions to set up and run the project locally. You can choose to run either the React or the Vue version.
 
----
+### Installation
 
-## Features
-
-- **Ticket CRUD**: Create, Read, Update, Delete tickets.
-- **Status Management**: Open, In Progress, Closed.
-- **Statistics Dashboard**: Visual representation of ticket counts per status.
-- **Responsive Design**: Mobile-first design, works on all devices.
-- **State Management**: React Context API / Vue reactive state.
-- **Charts**: `Recharts` (React) / `ApexCharts` (Vue).
-
----
-
-## Tech Stack
-
-- **Frontend**: React, Vue 3
-- **Routing**: React Router DOM (React), Vue Router (Vue)
-- **Styling**: CSS / SCSS
-- **Charts**: Recharts (React), ApexCharts via `vue3-apexcharts` (Vue)
-- **State Management**: React Context API / Vue reactive `ref` & `reactive`
-
----
-
-## Folder Structure
-
-### React Version
-
-```
-react-app/
-├── public/
-│   └── index.html
-├── src/
-│   ├── components/        # UI components
-│   ├── context/           # TicketContext.js for global state
-│   ├── pages/             # Main page components
-│   ├── App.js
-│   ├── index.js
-│   └── styles/
-├── package.json
-└── README.md
-```
-
-### Vue Version
-
-```
-vue-app/
-├── public/
-│   └── index.html
-├── src/
-│   ├── components/        # UI components
-│   ├── views/             # Main page views
-│   ├── router/            # Vue Router
-│   ├── App.vue
-│   ├── main.js
-│   ├── assets/
-│   └── charts/            # ApexCharts components
-├── package.json
-└── README.md
-```
-
----
-
-## Setup and Execution
-
-### React Version
-
-1. Clone the repository:
+First, clone the repository to your local machine:
 
 ```bash
-git clone <your-repo-url>
-cd react-app
-```
-
-2. Install dependencies:
-
-```bash
-npm install
-```
-
-3. Start development server:
-
-```bash
-npm start
-```
-
-- Opens at `http://localhost:3000`
-
-4. Build for production:
-
-```bash
-npm run build
+git clone https://github.com/Isaacayomi/HNG-STAGE-2.git
+cd HNG-STAGE-2/Ticket management web app
 ```
 
 ---
 
-#### 💚 To run the Vue version:
+### Running the React Version
 
-1. Navigate to Vue folder:
-
-```bash
-cd vue-app
-```
-
-2. Install dependencies:
-
-```bash
-npm install
-```
-
-3. Install ApexCharts for Vue:
-
-```bash
-npm install --save apexcharts vue3-apexcharts
-```
-
-4. Start development server:
-
-```bash
-npm run serve
-```
-
-- Opens at `http://localhost:8080`
-
-5. Build for production:
-
-```bash
-npm run build
-```
+1.  **Navigate to the React directory**:
+    ```bash
+    cd React-version
+    ```
+2.  **Install dependencies**:
+    ```bash
+    npm install
+    ```
+3.  **Start the development server**:
+    ```bash
+    npm run dev
+    ```
+4.  Open your browser and go to `http://localhost:5173` (or the port specified in your terminal).
 
 ---
 
-### Switching Between Versions
+### Running the Vue Version
 
-- **React:** Navigate to `react-app` and run the dev server (`npm run dev`)
-- **Vue:** Navigate to `vue-app` and run the dev server (`npm run dev`)
-- **Twig/PHP:** Not included; the directory structure exists only for reference. Normally run via a PHP server.
+1.  **Navigate to the Vue directory**:
+    ```bash
+    cd Vue-version/vue-project
+    ```
+2.  **Install dependencies**:
+    ```bash
+    npm install
+    ```
+3.  **Start the development server**:
+    ```bash
+    npm run dev
+    ```
+4.  Open your browser and go to `http://localhost:5173` (or the port specified in your terminal).
 
-> Ensure only **one dev server runs at a time** to avoid port conflicts.
+## 📋 Usage
 
----
+Once the application is running, you can perform the following actions:
 
-## UI Components & State Structure
+1.  **Register a New Account**: Navigate to the `/register` page to create a new user profile.
+2.  **Sign In**: Use your credentials on the `/login` page to access the application.
+3.  **Dashboard Overview**: After logging in, you will be redirected to the dashboard, which displays key metrics like total tickets, open tickets, and resolved tickets through interactive charts.
+4.  **Create a Ticket**: Click the "Create Ticket" button on the dashboard. A modal will appear where you can enter the ticket title, description, and set its initial status.
+5.  **View and Manage Tickets**: All existing tickets are listed on the dashboard and the dedicated `/tickets` page. You can edit a ticket's details or delete it using the provided controls on each ticket card.
 
-### React Version
+## 📄 License
 
-- **TicketContext.js:** Centralized state for tickets, form data, and editing status
-- **Components:**
-  - `TicketForm` – Create & edit tickets
-  - `TicketList` – Displays all tickets
-  - `TicketItem` – Individual ticket with edit/delete buttons
-  - `TicketStats` – Bar chart for ticket statistics
-- **State:**
-  - `tickets` – Array of ticket objects
-  - `form` – Current ticket input values
-  - `editing` – Currently editing ticket ID
-  - `message` – Notification messages
+This project is open source and available under the MIT License.
 
-### Vue Version
+## 👤 Author
 
-- **Reactive State:**
-  - `tickets` – Reactive array of tickets
-  - `form` – Current input values
-  - `editing` – Currently editing ticket ID
-- **Components:**
-  - `TicketForm.vue` – Ticket creation & editing
-  - `TicketList.vue` – List of tickets
-  - `TicketItem.vue` – Individual ticket actions
-  - `TicketStats.vue` – ApexCharts bar chart for ticket statistics
+**Ayomide Isaac**
 
----
+-   **LinkedIn**: [YourLinkedInUsername](https://linkedin.com/in/your-linkedin-username)
+-   **Twitter**: [@YourTwitterHandle](https://twitter.com/your-twitter-handle)
 
-## Accessibility & Known Issues
+<p align="center">
+  <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React">
+  <img src="https://img.shields.io/badge/Vue.js-35495E?style=for-the-badge&logo=vue.js&logoColor=4FC08D" alt="Vue.js">
+  <img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind CSS">
+  <img src="https://img.shields.io/badge/Vite-B73BFE?style=for-the-badge&logo=vite&logoColor=FFD62E" alt="Vite">
+</p>
 
-- **Accessibility:**
-  - Forms are labeled with `for` attributes
-  - Buttons are focusable via keyboard
-  - Color contrast checked for text readability
-- **Known Issues:**
-  - Vue version: Ticket editing state sometimes does not update immediately
-  - React version: None significant at this time
-  - Both versions: No backend, data resets on page reload
-
----
-
-## Example Test User Credentials
-
-> No authentication is implemented, but you can simulate user input:
-
-- **Test User 1:**
-
-  - Name: `Test User`
-  - Email: `test@example.com`
-
-- Use any ticket title/description for testing ticket creation.
-
----
-
-## Screenshots
-
-_(Add screenshots of React & Vue apps here)_
-
----
-
-## Contributing
-
-1. Fork the repository.
-2. Create a feature branch (`git checkout -b feature-name`).
-3. Commit your changes (`git commit -m 'Add feature'`).
-4. Push to branch (`git push origin feature-name`).
-5. Open a pull request.
-
----
-
-## License
-
-This project is open-source and available under the MIT License.
+[![Readme was generated by Dokugen](https://img.shields.io/badge/Readme%20was%20generated%20by-Dokugen-brightgreen)](https://www.npmjs.com/package/dokugen)
